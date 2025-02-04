@@ -46,11 +46,12 @@ const books = [
       class="mt-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:gap-20 gap-10 place-items-center lg:mx-48"
     >
       {
-        books.map((book) => (
+        books.map((book, index) => (
           <ShowcaseBook
             imgSrc={book.imgSrc}
             bookTitle={book.title}
             bookDesc={book.desc}
+            key={index}
           />
         ))
       }

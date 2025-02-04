@@ -1,8 +1,13 @@
 ---
-const { imgSrc, bookTitle, bookDesc } = Astro.props;
+const { imgSrc, bookTitle, bookDesc, key } = Astro.props;
 ---
 
-<div class="book-items">
+<div
+  class="book-items"
+  data-aos="fade-up"
+  data-aos-duration="1000"
+  data-aos-delay={`${250 * key}`}
+>
   <div class="main-book-wrap">
     <div class="book-cover">
       <div class="book-inside"></div>
