@@ -1,0 +1,50 @@
+---
+import Counter from "./Counter.astro";
+---
+
+<section class="py-12 bg-white">
+  <div class="container flex items-center gap-5 lg:flex-row flex-col-reverse">
+    <div class="flex-1 aspect-[9/12] rounded-2xl overflow-hidden">
+      <img
+        src="
+        https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt=""
+        class="h-full w-full object-cover"
+      />
+    </div>
+    <div class="flex-2 space-y-5">
+      <h2 class="text-4xl font-extrabold">About Us</h2>
+      <p class="text-xl">
+        Welcome to <span class="font-semibold">Young India Publication</span>,
+        where innovation meets passion. Founded and driven by young minds, we
+        believe in the power of fresh perspectives to shape the future of
+        literature, research, and knowledge-sharing.
+      </p>
+      <p class="text-xl">
+        Our mission is to <span class="font-semibold"
+          >empower aspiring authors and researchers</span
+        > by providing a platform to publish their work with integrity and creativity.
+        Whether it’s books that inspire or research papers that drive progress, we
+        are committed to making quality content accessible to all.
+      </p>
+      <p class="text-xl">
+        At Young India Publication, we embrace new ideas, bold voices, and the
+        spirit of change—because the future belongs to those who dare to think
+        differently.
+      </p>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <Counter target="25" duration="1000" title="Books Published" />
+        <Counter
+          target="10"
+          duration="1000"
+          title="Independent Authors Published"
+        />
+      </div>
+
+      <h6 class="text-2xl italic font-bold">
+        Young Minds. Bold Words. Bright Future.
+      </h6>
+    </div>
+  </div>
+</section>

@@ -1,11 +1,35 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import AboutUs from "../components/AboutUs.astro";
+import FeaturedBooks from "../components/FeaturedBooks.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <section>
+    <div class="container flex items-center gap-8 py-12 lg:flex-row flex-col">
+      <div class="flex-1">
+        <h1 class="text-6xl lg:text-8xl leading-none font-black text-maroon">
+          Young India Publications
+        </h1>
+        <p class="text-4xl lg:text-5xl leading-none font-medium pt-8">
+          Powered by Young Minds, Shaping the Future.
+        </p>
+        <a
+          href="/books"
+          class="bg-[#7ED4AD] mt-5 inline-block p-4 font-bold rounded-2xl text-neutral-900 text-xl"
+          >Check our Book Shelf</a
+        >
+      </div>
+      <div class="flex-1 aspect-square overflow-hidden rounded-2xl">
+        <img
+          src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+  <AboutUs />
+  <FeaturedBooks />
 </Layout>

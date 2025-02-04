@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Urbanist", serif;
+  --color-maroon: #780c28;
+  --color-mint-500: oklch(0.72 0.11 178);
+}
+
+* {
+  font-family: var(--font-sans);
+}
+
+.container {
+  @apply max-w-7xl mx-auto px-5;
+}
