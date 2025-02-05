@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import ShowcaseBook from "../components/ShowcaseBook.astro";
+import Layout from "../layouts/Layout.astro";
+
+const books = await getCollection("books");
+
+// console.log(books);
+---
+
+<Layout pageTitle="Books | Young India Publications">
+  <div class="container">
+    <div
+      class="mt-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:gap-20 gap-10 place-items-center"
+    >
+      {
+        books.map((book, index) => (
+          <ShowcaseBook
+            imgSrc={book.data.cover}
+            bookTitle={book.data.title}
+            bookDesc={book.data.abstract}
+            slug={book.slug}
+            key={index}
+          />
+        ))
+      }
+    </div>
+  </div>
+</Layout>

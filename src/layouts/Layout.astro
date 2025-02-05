@@ -1,4 +1,6 @@
 ---
+import { ClientRouter, fade } from "astro:transitions";
+
 import "../styles/global.css";
 
 import Header from "../components/Header.astro";
@@ -28,8 +30,9 @@ const { pageTitle } = Astro.props;
       href="https://unpkg.com/lenis@1.1.9/dist/lenis.css"
     />
     <title>{pageTitle}</title>
+    <ClientRouter />
   </head>
-  <body class="bg-indigo-50">
+  <body class="bg-indigo-50" transition:animate={fade({ duration: "0.8s" })}>
     <Header />
     <slot />
     <Footer />

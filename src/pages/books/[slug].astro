@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+// Fetch all books
+const books = await getCollection("books");
+
+// Fetch the current book based on the slug
+const { slug } = Astro.params;
+const book = books.find((b) => b.slug === slug);
+
+if (!book) {
+  throw new Error("Book not found");
+}
+
+export async function getStaticPaths() {
+  const bookEntries = await getCollection("books");
+
+  return bookEntries.map((book) => ({
+    params: {
+      slug: book.slug,
+    },
+  }));
+}
+---
+
+<Layout>
+  <section class="container mx-auto py-10">
+    <div class="book-page">
+      <h1 class="text-4xl font-bold text-center">{book.data.title}</h1>
+      <div class="book-details mt-6 flex justify-center">
+        <div class="book-cover">
+          <img
+            src={book.data.cover}
+            alt={book.data.title}
+            class="w-64 h-96 object-cover"
+          />
+        </div>
+        <div class="book-info ml-10">
+          <p class="text-lg text-neutral-700">
+            <strong>Author:</strong>
+            {book.data.author}
+          </p>
+          <p class="mt-4">{book.data.abstract}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
