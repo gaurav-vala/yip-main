@@ -24,12 +24,12 @@ export async function getStaticPaths() {
 }
 ---
 
-<Layout>
+<Layout pageTitle={book.data.title}>
   <section class="container mx-auto py-10">
     <div class="book-page">
       <h1 class="text-4xl font-bold text-center">{book.data.title}</h1>
       <div class="book-details mt-6 flex justify-center">
-        <div class="book-cover">
+        <div class="book-cover" transition:name={`book-cover-${slug}`}>
           <img
             src={book.data.cover}
             alt={book.data.title}

@@ -1,38 +1,179 @@
 ---
-const navItems = [
+const navItems = [{ href: "/about", text: "About Us" }];
+
+const dropdownItems = [
   { href: "/bookshowcase", text: "Books" },
-  { href: "/about", text: "About Us" },
+  { href: "/papers", text: "Research Papers" },
 ];
 ---
 
-<header class="py-5">
-  <div class="container flex items-center justify-between">
-    <a href="/" class="block w-20 aspect-square">
+<header class="py-5 relative bg-white shadow">
+  <div class="container mx-auto flex items-center justify-between px-5">
+    <a href="/" class="block w-20">
       <img
-        class="w-full h-full object-contain object-center"
+        class="w-full h-full object-contain"
         src="/images/logo.svg"
-        alt=""
+        alt="Logo"
       />
     </a>
-    <ul class="flex items-center lg:gap-8 gap-3.5">
+
+    <!-- Hamburger Button -->
+    <button
+      id="menu-toggle"
+      class="md:hidden block p-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+    >
+      <svg
+        id="menu-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-8 h-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+
+    <!-- Navigation Links -->
+    <nav class="hidden md:flex items-center gap-4">
+      <details class="relative group">
+        <summary
+          class="cursor-pointer text-xl font-semibold transition hover:text-[#780C28]"
+          >Book Shelf</summary
+        >
+        <ul
+          class="dropdown absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-lg border overflow-hidden"
+        >
+          {
+            dropdownItems.map((item) => (
+              <li>
+                <a href={item.href} class="block px-4 py-2 hover:bg-gray-200">
+                  {item.text}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+
       {
         navItems.map((item) => (
-          <li>
+          <a
+            class="text-xl font-semibold transition hover:text-[#780C28]"
+            href={item.href}
+          >
+            {item.text}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      href="/contact"
+      class="hidden md:block bg-maroon text-white px-3.5 py-2.5 rounded-lg"
+      >Contact Us</a
+    >
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-md p-5"
+  >
+    <ul>
+      <details class="mb-2">
+        <summary class="cursor-pointer text-lg font-semibold"
+          >Book Shelf</summary
+        >
+        <ul class="dropdown pl-4">
+          {
+            dropdownItems.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="block py-1 text-gray-700 hover:text-[#780C28]"
+                >
+                  {item.text}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+
+      {
+        navItems.map((item) => (
+          <li class="mb-2">
             <a
-              class="text-xl font-semibold transition-all hover:text-[#780C28]"
               href={item.href}
+              class="block text-lg font-semibold hover:text-[#780C28]"
             >
               {item.text}
             </a>
           </li>
         ))
       }
+
+      <li>
+        <a
+          href="/contact"
+          class="block bg-maroon text-white text-center py-2 rounded-lg"
+          >Contact Us</a
+        >
+      </li>
     </ul>
-    <a
-      href="/contact"
-      class="block bg-maroon text-white px-3.5 py-2.5 rounded-lg"
-    >
-      Contact Us</a
-    >
   </div>
 </header>
+
+<style>
+  /* Dropdown Animation */
+  .dropdown {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  details[open] .dropdown {
+    max-height: 200px;
+  }
+
+  /* Mobile Menu Animation */
+  #mobile-menu {
+    transition:
+      transform 0.3s ease-out,
+      opacity 0.3s ease-out;
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+  }
+  #mobile-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuIcon = document.getElementById("menu-icon");
+
+    if (menuToggle && mobileMenu && menuIcon) {
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
+        mobileMenu.classList.toggle("hidden");
+
+        // Toggle menu icon (hamburger ↔ close)
+        if (mobileMenu.classList.contains("hidden")) {
+          menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />`;
+        } else {
+          menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />`;
+        }
+      });
+    }
+  });
+</script>

@@ -1,33 +1,8 @@
 ---
+import { getCollection } from "astro:content";
 import ShowcaseBook from "./ShowcaseBook.astro";
 
-const books = [
-  {
-    imgSrc: "/images/book1.webp",
-    title: "Book Title 1",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint dolores ea.",
-  },
-  {
-    imgSrc: "/images/book2.webp",
-    title: "Book Title 2",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint dolores ea.",
-  },
-  {
-    imgSrc: "/images/book3.webp",
-    title: "Book Title 3",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint dolores ea.",
-  },
-  {
-    imgSrc: "/images/book4.webp",
-    title: "Book Title 4",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint dolores ea.",
-  },
-  {
-    imgSrc: "/images/book5.webp",
-    title: "Book Title 5",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint dolores ea.",
-  },
-];
+const books = await getCollection("books");
 ---
 
 <section class="py-12">
@@ -48,9 +23,10 @@ const books = [
       {
         books.map((book, index) => (
           <ShowcaseBook
-            imgSrc={book.imgSrc}
-            bookTitle={book.title}
-            bookDesc={book.desc}
+            imgSrc={book.data.cover}
+            bookTitle={book.data.title}
+            bookDesc={book.data.abstract}
+            slug={book.slug}
             key={index}
           />
         ))

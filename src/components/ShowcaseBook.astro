@@ -10,7 +10,7 @@ const { imgSrc, bookTitle, bookDesc, key, slug } = Astro.props;
 >
   <div class="main-book-wrap">
     <a href={`/books/${slug}`}>
-      <div class="book-cover">
+      <div class="book-cover" transition:name={`book-cover-${slug}`}>
         <div class="book-inside"></div>
         <div class="book-image">
           <img src={imgSrc} />
