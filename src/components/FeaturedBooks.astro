@@ -25,6 +25,7 @@ const books = await getCollection("books");
           <ShowcaseBook
             imgSrc={book.data.cover}
             bookTitle={book.data.title}
+            bookAuthor={book.data.author}
             bookDesc={book.data.abstract}
             slug={book.slug}
             key={index}

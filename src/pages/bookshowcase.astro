@@ -15,13 +15,16 @@ const books = await getCollection("books");
     >
       {
         books.map((book, index) => (
-          <ShowcaseBook
-            imgSrc={book.data.cover}
-            bookTitle={book.data.title}
-            bookDesc={book.data.abstract}
-            slug={book.slug}
-            key={index}
-          />
+          <>
+            <ShowcaseBook
+              imgSrc={book.data.cover}
+              bookAuthor={book.data.author}
+              bookTitle={book.data.title}
+              bookDesc={book.data.abstract}
+              slug={book.slug}
+              key={index}
+            />
+          </>
         ))
       }
     </div>

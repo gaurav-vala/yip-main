@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Bookshowcase from "../bookshowcase.astro";
+import ShowcaseBook from "../../components/ShowcaseBook.astro";
 
 // Fetch all books
 const books = await getCollection("books");
@@ -27,21 +29,31 @@ export async function getStaticPaths() {
 <Layout pageTitle={book.data.title}>
   <section class="container mx-auto py-10">
     <div class="book-page">
-      <h1 class="text-4xl font-bold text-center">{book.data.title}</h1>
-      <div class="book-details mt-6 flex justify-center">
-        <div class="book-cover" transition:name={`book-cover-${slug}`}>
-          <img
-            src={book.data.cover}
-            alt={book.data.title}
-            class="w-64 h-96 object-cover"
-          />
+      <div class="book-details mt-6 gap-8 flex md:flex-row flex-col">
+        <div class="w-full md:w-80">
+          <div class="book-cover" transition:name={`book-cover-${slug}`}>
+            <div class="book-inside"></div>
+            <div class="book-image">
+              <img src={book.data.cover} />
+              <div class="effect"></div>
+              <div class="light"></div>
+            </div>
+          </div>
         </div>
-        <div class="book-info ml-10">
+        <div class="book-info flex-1">
+          <h1 class="text-4xl font-bold">{book.data.title}</h1>
           <p class="text-lg text-neutral-700">
             <strong>Author:</strong>
             {book.data.author}
           </p>
           <p class="mt-4">{book.data.abstract}</p>
+
+          <ul>
+            <li>
+              <strong>ISBN:</strong>
+              <!-- {book.data.isbn} -->
+            </li>
+          </ul>
         </div>
       </div>
     </div>

@@ -1,5 +1,7 @@
 ---
-const { imgSrc, bookTitle, bookDesc, key, slug } = Astro.props;
+const { imgSrc, bookTitle, bookDesc, bookAuthor, key, slug } = Astro.props;
+
+console.log(bookAuthor);
 ---
 
 <div
@@ -23,13 +25,13 @@ const { imgSrc, bookTitle, bookDesc, key, slug } = Astro.props;
     <div class="mt-10 flex flex-col items-center text-center space-y-3">
       <h2 class="text-2xl font-bold">{bookTitle}</h2>
       <p class="text-lg text-neutral-800 leading-normal">
-        {bookDesc}
+        {bookAuthor}
       </p>
     </div>
   </div>
 </div>
 
-<style>
+<style is:global>
   .book-cover {
     position: relative;
   }
