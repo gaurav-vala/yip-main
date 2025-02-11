@@ -1,7 +1,5 @@
 ---
 const { imgSrc, bookTitle, bookDesc, bookAuthor, key, slug } = Astro.props;
-
-console.log(bookAuthor);
 ---
 
 <div
@@ -12,7 +10,7 @@ console.log(bookAuthor);
 >
   <div class="main-book-wrap">
     <a href={`/books/${slug}`}>
-      <div class="book-cover" transition:name={`book-cover-${slug}`}>
+      <div class="book-cover">
         <div class="book-inside"></div>
         <div class="book-image">
           <img src={imgSrc} />
@@ -22,9 +20,9 @@ console.log(bookAuthor);
       </div>
     </a>
 
-    <div class="mt-10 flex flex-col items-center text-center space-y-3">
-      <h2 class="text-2xl font-bold">{bookTitle}</h2>
-      <p class="text-lg text-neutral-800 leading-normal">
+    <div class="mt-8 flex flex-col items-center text-center space-y-2">
+      <h2 class="text-lg md:text-2xl font-bold">{bookTitle}</h2>
+      <p class="text-md md:text-lg text-neutral-800 leading-normal">
         {bookAuthor}
       </p>
     </div>

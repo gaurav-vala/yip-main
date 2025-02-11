@@ -1,14 +1,13 @@
 ---
-const navItems = [{ href: "/about", text: "About Us" }];
-
 const dropdownItems = [
   { href: "/bookshowcase", text: "Books" },
-  { href: "/papers", text: "Research Papers" },
+  { href: "/e-journals", text: "E-Journals" },
 ];
 ---
 
-<header class="py-5 relative border-b border-neutral-200">
+<header class="py-5 relative border-b border-neutral-200 bg-white">
   <div class="container mx-auto flex items-center justify-between px-5">
+    <!-- Logo -->
     <a href="/" class="block w-20">
       <img
         class="w-full h-full object-contain"
@@ -17,18 +16,40 @@ const dropdownItems = [
       />
     </a>
 
-    <!-- Hamburger Button -->
-    <button
-      id="menu-toggle"
-      class="md:hidden block p-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-6">
+      <ul class="flex items-center gap-6">
+        {
+          dropdownItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="block px-4 py-2 hover:text-maroon font-semibold text-xl transition-all"
+              >
+                {item.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Contact Button (Always Visible) -->
+    <a
+      href="/contact"
+      class="hidden md:block bg-maroon text-white px-4 py-2.5 rounded-lg hover:bg-opacity-90"
     >
+      Contact Us
+    </a>
+
+    <!-- Mobile Menu Toggle -->
+    <button id="menu-btn" class="md:hidden p-2 focus:outline-none">
       <svg
-        id="menu-icon"
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-8 h-8"
+        class="w-8 h-8 text-gray-800"
         fill="none"
-        viewBox="0 0 24 24"
         stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           stroke-linecap="round"
@@ -37,143 +58,79 @@ const dropdownItems = [
           d="M4 6h16M4 12h16m-7 6h7"></path>
       </svg>
     </button>
+  </div>
 
-    <!-- Navigation Links -->
-    <nav class="hidden md:flex items-center gap-4">
-      <details class="relative group">
-        <summary
-          class="cursor-pointer text-xl font-semibold transition hover:text-[#780C28]"
-          >Book Shelf</summary
+  <!-- Mobile Navigation Menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden fixed top-0 left-0 w-full h-full bg-white transform -translate-x-full transition-transform duration-300 z-50"
+  >
+    <div class="flex justify-between items-center p-5 border-b border-gray-200">
+      <a href="/" class="block w-20">
+        <img
+          class="w-full h-full object-contain"
+          src="/images/logo.svg"
+          alt="Logo"
+        />
+      </a>
+      <button id="close-btn" class="p-2 focus:outline-none cursor-pointer">
+        <svg
+          class="w-8 h-8 text-gray-800 cursor-pointer"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-        <ul
-          class="dropdown absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-lg border overflow-hidden"
-        >
-          {
-            dropdownItems.map((item) => (
-              <li>
-                <a href={item.href} class="block px-4 py-2 hover:bg-gray-200">
-                  {item.text}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </details>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
 
+    <nav class="flex flex-col items-center gap-6 mt-6">
       {
-        navItems.map((item) => (
+        dropdownItems.map((item) => (
           <a
-            class="text-xl font-semibold transition hover:text-[#780C28]"
             href={item.href}
+            class="block text-xl font-semibold text-gray-800 hover:text-maroon"
           >
             {item.text}
           </a>
         ))
       }
+      <a
+        href="/contact"
+        class="block bg-maroon text-white px-4 py-2.5 rounded-lg hover:bg-opacity-90"
+        >Contact Us</a
+      >
     </nav>
-
-    <a
-      href="/contact"
-      class="hidden md:block bg-maroon text-white px-3.5 py-2.5 rounded-lg"
-      >Contact Us</a
-    >
-  </div>
-
-  <!-- Mobile Menu -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-md p-5"
-  >
-    <ul>
-      <details class="mb-2">
-        <summary class="cursor-pointer text-lg font-semibold"
-          >Book Shelf</summary
-        >
-        <ul class="dropdown pl-4">
-          {
-            dropdownItems.map((item) => (
-              <li>
-                <a
-                  href={item.href}
-                  class="block py-1 text-gray-700 hover:text-[#780C28]"
-                >
-                  {item.text}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </details>
-
-      {
-        navItems.map((item) => (
-          <li class="mb-2">
-            <a
-              href={item.href}
-              class="block text-lg font-semibold hover:text-[#780C28]"
-            >
-              {item.text}
-            </a>
-          </li>
-        ))
-      }
-
-      <li>
-        <a
-          href="/contact"
-          class="block bg-maroon text-white text-center py-2 rounded-lg"
-          >Contact Us</a
-        >
-      </li>
-    </ul>
   </div>
 </header>
 
-<style>
-  /* Dropdown Animation */
-  .dropdown {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-  }
-  details[open] .dropdown {
-    max-height: 200px;
-  }
-
-  /* Mobile Menu Animation */
-  #mobile-menu {
-    transition:
-      transform 0.3s ease-out,
-      opacity 0.3s ease-out;
-    transform: translateY(-10px);
-    opacity: 0;
-    pointer-events: none;
-  }
-  #mobile-menu.active {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-</style>
-
+<!-- JavaScript for Menu Toggle -->
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const menuToggle = document.getElementById("menu-toggle");
+  function setupMenu() {
+    const menuBtn = document.getElementById("menu-btn");
+    const closeBtn = document.getElementById("close-btn");
     const mobileMenu = document.getElementById("mobile-menu");
-    const menuIcon = document.getElementById("menu-icon");
 
-    if (menuToggle && mobileMenu && menuIcon) {
-      menuToggle.addEventListener("click", () => {
-        mobileMenu.classList.toggle("active");
-        mobileMenu.classList.toggle("hidden");
+    if (menuBtn && closeBtn && mobileMenu) {
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.remove("-translate-x-full");
+      });
 
-        // Toggle menu icon (hamburger ↔ close)
-        if (mobileMenu.classList.contains("hidden")) {
-          menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />`;
-        } else {
-          menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />`;
-        }
+      closeBtn.addEventListener("click", () => {
+        mobileMenu.classList.add("-translate-x-full");
       });
     }
-  });
+  }
+
+  // Run on initial load
+  setupMenu();
+
+  // Re-run on page changes in Astro SPA mode
+  document.addEventListener("astro:after-swap", setupMenu);
 </script>

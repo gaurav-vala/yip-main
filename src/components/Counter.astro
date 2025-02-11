@@ -14,40 +14,47 @@ const { target, duration, title } = Astro.props;
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  function initializeCounters() {
     const counters = document.querySelectorAll(".counter");
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            const targetEl = entry.target; // Get target element
+            if (!(targetEl instanceof HTMLElement)) return; // Type check
+
             let start = 0;
-            const target = parseInt(
-              entry.target.getAttribute("data-target") ?? "0"
-            );
-            const duration = parseInt(
-              entry.target.getAttribute("data-duration") ?? "2000"
-            );
+            const target = parseInt(targetEl.dataset.target ?? "0");
+            const duration = parseInt(targetEl.dataset.duration ?? "2000");
             const increment = target / (duration / 16);
 
             const updateCounter = () => {
               start += increment;
               if (start >= target) {
-                entry.target.textContent = `${target.toString()}+`;
+                targetEl.textContent = `${target}+`;
               } else {
-                entry.target.textContent = `${Math.floor(start).toString()}+`;
+                targetEl.textContent = `${Math.floor(start)}+`;
                 requestAnimationFrame(updateCounter);
               }
             };
 
             updateCounter();
-            observer.unobserve(entry.target); // Stop observing after animation
+            observer.unobserve(targetEl);
           }
         });
       },
       { threshold: 0.5 }
     );
 
-    counters.forEach((counter) => observer.observe(counter));
-  });
+    counters.forEach((counter) => {
+      observer.observe(counter);
+    });
+  }
+
+  // Run on initial load
+  initializeCounters();
+
+  // Re-run on page changes in Astro SPA mode
+  document.addEventListener("astro:after-swap", initializeCounters);
 </script>

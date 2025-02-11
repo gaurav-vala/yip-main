@@ -5,6 +5,7 @@ const books = defineCollection({
         title: z.string(),
         author: z.string(),
         abstract: z.string(),
+        isbn: z.string(),
         cover: z.string(),
     }),
 });
